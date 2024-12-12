@@ -1,0 +1,60 @@
+spring:
+  web:
+    cors:
+      enabled: true
+  mvc:
+    cors:
+      mapping: "/**"
+      allowed-origins: "http://localhost:3000"
+      allowed-methods: "*"
+      allowed-headers: "*"
+      exposed-headers:
+        - "Access-Control-Allow-Origin"
+        - "Access-Control-Allow-Methods"
+        - "Access-Control-Allow-Headers"
+        - "Access-Control-Allow-Credentials"
+      allow-credentials: true
+      max-age:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  h2:
+    console:
+      enabled: true  # Enables H2 console at /h2-console
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update  # Automatically create/update tables on startup
+    show-sql: true  # Display SQL queries in logs
+    properties:
+      hibernate:
+        format_sql: true  # Pretty print the SQL queries in logs
+
+logging:
+  level:
+    com.example.usersapi: DEBUG  # Enable detailed logging for the application
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"  # Custom log pattern
+
+#springdoc:
+#  api-docs:
+#    enabled: true  # Enables Swagger/OpenAPI API docs
+#  swagger-ui:
+#    enabled: true  # Enables Swagger UI for documentation
+
+# Retry configuration for the external API calls
+#spring:
+#  retry:
+#    enabled: true
+#    max-attempts: 3
+#    backoff:
+#      initial-interval: 1000  # Initial retry delay in milliseconds
+#      max-interval: 5000      # Maximum retry delay in milliseconds
+#      multiplier: 2           # Exponential backoff multiplier
+
+# Optional: If there are any custom properties you want to add
+external:
+  api:
+    url: "https://dummyjson.com/users"  # Base URL for the external API
